@@ -1,0 +1,69 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="LINES.js"></script>
+
+<dom-module id="circle-transition">
+    <style>
+
+    </style>
+    <template>
+    <svg id="circlet"></svg>
+  </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: 'circle-transition',
+        properties: {
+            size: {
+                type: Number,
+                value: 100
+            },
+            color: {
+                type: String,
+                value: 'black'
+            },
+            delay: {
+                type: Number,
+                value: 0
+            }
+        },
+        ready: function() {
+            this.render();
+        },
+        render: function() {
+            data = [this.size / 2];
+            svg = d3.select(this.$.circlet)
+                .attr("width", this.size)
+                .attr("height", this.size);
+            lines = svg.selectAll(".circle");
+            lines.data(data)
+                .enter().append("circle")
+                .attr("cx", d => d)
+                .attr("cy", d => d)
+                .attr("r", d => d)
+                .style("fill", this.color)
+                .transition()
+                .delay(this.delay)
+                .on("end", function repeat(){
+                  d3.select(this)
+                  .transition()
+                  .duration(1000)
+                  .attr("r", d => d / 5)
+                  .attr("cy", d => d / 5)
+                  .attr("cx", d => 4*d / 3)
+                  .transition()
+                  .duration(500)
+                  .attr("cx", d => 2*d/3 )
+                  .transition()
+                  .duration(1000)
+                  .attr("r", d => d)
+                  .attr("cy", d => d )
+                  .attr("cx", d => d )
+                  .on("end", repeat);
+                });
+            lines.exit().remove();
+        }
+    });
+</script>

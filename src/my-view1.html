@@ -1,0 +1,70 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="circle-transition.html">
+<dom-module id="my-view1">
+    <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+
+    <div class="card">
+      <h1>Simple Component: <circle-transition size=20 color='black'></circle-transition> &lt;circle-transition&gt;</h1>
+      <p> An interesting application of components is to reuse costume
+        complex html elements. Here we use d3 to create a html element that
+         transitions forever independently from the rest of the elements.
+       <circle-transition size=20 color='red'></circle-transition></p>
+      <p> Why use this element in particular? I have no idea. But one may
+      create costume transition html elements for your own reasons that
+    can even be written inline! For this simple one you can change its size and color!</p>
+      <center>
+        <circle-transition size=50 color='yellow'></circle-transition>
+        <circle-transition size=100 color='orange'></circle-transition>
+        <circle-transition size=150 color='red'></circle-transition>
+        <circle-transition size=200 color='Crimson'></circle-transition>
+        <circle-transition size=150 color='#8B008B'></circle-transition>
+        <circle-transition size=100 color='#9932CC'></circle-transition>
+        <circle-transition size=50 color='#FF00FF'></circle-transition>
+      </center>
+    <p>Throught a simple &lt;circle-transition color='color' size=100 &gt; tag
+    you can define this circles, even through haxadecimal color codes! </p>
+    <center>
+      #FF4500: <circle-transition size=30 color='#FF4500'></circle-transition>
+      #98FB98: <circle-transition size=30 color='#98FB98'></circle-transition>
+      #40E0D0: <circle-transition size=30 color='#40E0D0'></circle-transition>
+      #00FA9A: <circle-transition size=30 color='#00FA9A'></circle-transition>
+      #FF1493: <circle-transition size=30 color='#FF1493'></circle-transition>
+    </center>
+    <p>You can also determine an absolute delay in miliseconds to get different time moving circles:
+       &lt;circle-transition delay=1000 size=100 &gt; </p>
+    <center>
+      <circle-transition size=50 color='yellow' delay=0></circle-transition>
+      <circle-transition size=100 color='orange' delay=100></circle-transition>
+      <circle-transition size=150 color='red' delay=200></circle-transition>
+      <circle-transition size=200 color='Crimson' delay=300></circle-transition>
+      <circle-transition size=150 color='#8B008B' delay=400></circle-transition>
+      <circle-transition size=100 color='#9932CC' delay=500></circle-transition>
+      <circle-transition size=50 color='#FF00FF' delay=600></circle-transition>
+    </center>
+    </div>
+
+  </template>
+    <script>
+        Polymer({
+            is: 'my-view1'
+        });
+    </script>
+</dom-module>

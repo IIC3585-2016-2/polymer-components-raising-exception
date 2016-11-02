@@ -1,0 +1,109 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="line-star.html">
+<link rel="import" href="line-star-edit.html">
+
+<dom-module id="my-view2">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+
+    <div class="card">
+      <h1>Middle Component: <line-star points=6 size=20 steps=4></line-star>&lt;line-star&gt;</h1>
+      <p> &lt;line-star&gt; is a simple svg html element of a
+      radial star-like structure compose of only straight svg lines. Like:</p>
+      <center>
+        <line-star ></line-star>
+        <line-star ></line-star>
+        <line-star ></line-star>
+        <line-star ></line-star>
+        <line-star ></line-star>
+      </center>
+      <p> Which is the default star.
+        You can change the number of points it has ( &lt;=3 ): &lt;line-star points=3&gt; </p>
+      <center>
+        <line-star points=3 ></line-star>
+        <line-star points=4 ></line-star>
+        <line-star points=5 ></line-star>
+        <line-star points=6 ></line-star>
+        <line-star points=7 ></line-star>
+      </center>
+      <p>
+      You can change the number of steps to create it ( &lt;=3 ): &lt;line-star points=3 steps=15&gt; </p>
+      <center>
+        <line-star points=3 steps=5></line-star>
+        <line-star points=3 steps=10></line-star>
+        <line-star points=3 steps=15></line-star>
+        <line-star points=3 steps=20></line-star>
+        <line-star points=3 steps=25></line-star>
+      </center>
+      <p>
+      You can change it's size ( square svg ): &lt;line-star points=4 size=200&gt; </p>
+      <center>
+        <line-star points=4 size=100 ></line-star>
+        <line-star points=4 size=150 ></line-star>
+        <line-star points=4 size=200 ></line-star>
+        <line-star points=4 size=150 ></line-star>
+        <line-star points=4 size=100 ></line-star>
+      </center>
+      <p>
+      You can rotate it: &lt;line-star points=4 rotation=30&gt; </p>
+      <center>
+        <line-star points=4 rotation=0 ></line-star>
+        <line-star points=4 rotation=30 ></line-star>
+        <line-star points=4 rotation=60 ></line-star>
+        <line-star points=4 rotation=90 ></line-star>
+        <line-star points=4 rotation=45 ></line-star>
+      </center>
+      <p>
+      You change it's color through simple string colors: &lt;line-star points=4 color='red'&gt; </p>
+      <center>
+        <line-star points=4 color='orange' ></line-star>
+        <line-star points=4 color='red' ></line-star>
+        <line-star points=4 color='Crimson' ></line-star>
+        <line-star points=4 color='#8B008B' ></line-star>
+        <line-star points=4 color='#9932CC' ></line-star>
+      </center>
+      <p>
+      You change the width of the stroke of the lines: &lt;line-star points=4 color='red' stroke=10 &gt;</p>
+      <center>
+        <line-star points=4 color='red' stroke=1 ></line-star>
+        <line-star points=4 color='red' stroke=2 ></line-star>
+        <line-star points=4 color='red' stroke=3 ></line-star>
+        <line-star points=4 color='red' stroke=4 ></line-star>
+        <line-star points=4 color='red' stroke=5 ></line-star>
+      </center>
+      <p>
+      And make it your own: &lt;points=6 steps=12 rotation=10 size=300 color='green' stroke=2&gt; </p>
+      <center>
+        <line-star points=6 steps=12 rotation=10 size=350 color='green' stroke=2 ></line-star>
+      </center>
+      <p> Edit a  <line-star points=5 steps=4 rotation=0 size=25 color='orange' stroke=1 ></line-star>
+         yourself!</p>
+      <center>
+        <line-star-edit> </line-star-edit>
+      </center>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'my-view2'
+    });
+  </script>
+</dom-module>

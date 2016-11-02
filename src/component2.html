@@ -1,0 +1,229 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/google-signin/google-signin.html">
+<link rel="import" href="../bower_components/google-sheets/google-sheets.html">
+<link rel="import" href="../bower_components/iron-data-table/iron-data-table.html">
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<dom-module id="polymer-test2">
+    <style>
+      .legend {
+        font-size: 12px;
+      }
+      rect {
+        stroke-width: 2;
+      }
+      .content{
+        align:inline-block;
+      }
+      .left{
+        float:left;
+        width:70%;
+      }
+      .right{
+        float:left;
+        width:30%;
+      }
+      .block{
+        align:block;
+        width:100%;
+        height:200px;
+      }
+    </style>:
+    <template>
+      <google-signin
+        client-id="634390672795-gltuim1i7va3jqpesiuuk83h84d6e33d.apps.googleusercontent.com"
+        scopes="https://spreadsheets.google.com/feeds">
+      </google-signin>
+      <google-sheets id="sheet"
+                  client-id="634390672795-gltuim1i7va3jqpesiuuk83h84d6e33d.apps.googleusercontent.com"
+                  key="18EaQ2BsPT55cu41zKvVo-oMjnc4jtqMJ9UsoS51-RuU" tab-id="1"
+                  published rows="{{rows}}" tab="{{tab}}"
+                  open-in-google-docs-url="{{openInGoogleDocsUrl}}"></google-sheets>
+        <h2>CHART</h2>
+        <div class="content">
+            <iron-data-table class="block" id="table2" items="[[table.selectedItems]]">
+                <data-table-column name="Github" filter-by="gsx$github.$t">
+                  <template>[[item.gsx$github.$t]]</template>
+                </data-table-column>
+                <data-table-column name="Catedra" sort-by="gsx$nc.$t">
+                  <template>[[item.gsx$nc.$t]]</template>
+                </data-table-column>
+                <data-table-column name="T01" sort-by="gsx$t.$t">
+                  <template>[[item.gsx$t01.$t]]</template>
+                </data-table-column>
+                <data-table-column name="T02" sort-by="gsx$t.$t">
+                  <template>[[item.gsx$t02.$t]]</template>
+                </data-table-column>
+                <data-table-column name="T03" sort-by="gsx$t.$t">
+                  <template>[[item.gsx$t03.$t]]</template>
+                </data-table-column>
+                <data-table-column name="T04" sort-by="gsx$t.$t">
+                  <template>[[item.gsx$t04.$t]]</template>
+                </data-table-column>
+                <data-table-column name="T05" sort-by="gsx$t.$t">
+                  <template>[[item.gsx$t05.$t]]</template>
+                </data-table-column>
+                <data-table-column name="T06" sort-by="gsx$t.$t">
+                  <template>[[item.gsx$t06.$t]]</template>
+                </data-table-column>
+                <data-table-column name="T07" sort-by="gsx$t.$t">
+                  <template>[[item.gsx$t07.$t]]</template>
+                </data-table-column>
+                <data-table-column name="Tareas" sort-by="gsx$t.$t">
+                  <template>[[item.gsx$t.$t]]</template>
+                </data-table-column>
+                <data-table-column name="Nota Final" sort-by="gsx$nf.$t">
+                  <template>[[item.gsx$nf.$t]]</template>
+                </data-table-column>
+            </iron-data-table>
+            <iron-data-table class="left" id="table" items="[[rows]]" selection-enabled multi-selection>
+              <data-table-column name="No. Alumno">
+                <template>[[item.gsx$no.alumno.$t]]</template>
+              </data-table-column>
+              <data-table-column name="Github" filter-by="gsx$github.$t">
+                <template>[[item.gsx$github.$t]]</template>
+              </data-table-column>
+              <data-table-column name="Catedra" sort-by="gsx$nc.$t">
+                <template>[[item.gsx$nc.$t]]</template>
+              </data-table-column>
+              <data-table-column name="Tareas" sort-by="gsx$t.$t">
+                <template>[[item.gsx$t.$t]]</template>
+              </data-table-column>
+              <data-table-column name="Nota Final" sort-by="gsx$nf.$t">
+                <template>[[item.gsx$nf.$t]]</template>
+              </data-table-column>
+            </iron-data-table>
+
+            <svg class="right" id="chart">
+            </svg>
+
+        </div>
+
+
+  </template>
+</dom-module>
+<script>
+Polymer({
+    is: 'polymer-test2',
+    properties:{
+      rows:{
+        type:Array,
+        value: [],
+        observer: '__rowsChanged'
+      },
+      width:{
+        type:Number,
+        value:360
+      },
+      height:{
+        type:Number,
+        value:360
+      },
+      radius:{
+        type:Number,
+        value: 0
+      },
+      legendRectSize:{
+        type:Number,
+        value: 18
+      },
+      legendSpacing:{
+        type:Number,
+        value: 4
+      }
+    },
+    ready: function() {
+      this.radius = Math.min(this.width, this.height) / 2
+      //var table = this.$.table.addEventListener("selected-items-changed",this._selectedItems);
+    },
+    listeners:{
+      'selected-items-changed':'_selectedItems'
+    }
+    ,
+    __aprova3: function(data){
+      let napprove = data.filter((item) => {
+        if (item.gsx$nf.$t >= 3.95)
+         return true
+        return false
+      }).length
+      data = [
+              { label:'aprobados',count:napprove} ,
+              { label:'reprobados',count:this.rows.length - napprove}
+            ]
+      return data
+    },
+    __rowsChanged: function(){
+        if (this.rows.length == 0)
+          return;
+        this.render(this.__aprova3(this.rows))
+      },
+    _selectedItems: function(e){
+      var table = this.$.table
+      var data = table.selectedItems
+      console.log(e,data)
+      if (data && (data.length >= 0 || data.inverted)){
+        if (data.inverted){
+          this.render(this.__aprova3(table.items))
+        }
+        else{
+          this.render(this.__aprova3(data))
+        }
+      }
+    },
+    render: function(data){
+      var self = this
+      var donutWidth = 75;
+      var color = d3.scaleOrdinal(d3.schemeCategory20b);
+
+      var svg = d3.select(this.$.chart)
+          .attr('width', this.width)
+          .attr('height', this.height)
+          .append('g')
+          .attr('transform', 'translate(' + (this.width / 2) +  ',' + (this.height / 2) + ')');
+
+      var arc = d3.arc()
+          .innerRadius(this.radius - donutWidth)
+          .outerRadius(this.radius);
+
+      var pie = d3.pie()
+        .value(function(d) { return d.count; })
+        .sort(null);
+
+      var path = svg.selectAll('path')
+        .data(pie(data))
+        .enter()
+        .append('path')
+        .attr('d', arc)
+        .attr('fill', function(d, i) {
+          return color(d.data.label);
+        });
+
+      var legend = svg.selectAll('.legend')
+        .data(color.domain())
+        .enter()
+        .append('g')
+        .attr('class', 'legend')
+        .attr('transform', function(d, i) {
+          var height = self.legendRectSize + self.legendSpacing;
+          var offset =  height * color.domain().length / 2;
+          var horz = -2 * self.legendRectSize;
+          var vert = i * height - offset;
+          return 'translate(' + horz + ',' + vert + ')';
+      });
+
+      legend.append('rect')
+      .attr('width', this.legendRectSize)
+      .attr('height', this.legendRectSize)
+      .style('fill', color)
+      .style('stroke', color);
+
+      legend.append('text')
+      .attr('x', this.legendRectSize + this.legendSpacing)
+      .attr('y', this.legendRectSize - this.legendSpacing)
+      .text(function(d) { return d.toUpperCase(); });
+    }
+  })
+
+</script>

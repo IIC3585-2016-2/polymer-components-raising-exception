@@ -1,0 +1,109 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="line-star.html">
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="LINES.js"></script>
+
+<dom-module id="line-star-edit">
+    <style>
+      #controls{
+        display: block;
+      }
+    </style>
+    <template>
+
+      <div id=controls>
+      <p><label for="input">Points: </label><br>
+            <input id="input"
+            type="range"
+            value="{{points::input}}"
+            min="3" max="10"
+            on-change="render"> {{points}}</p>
+      <p><label for="input">Steps: </label><br>
+            <input id="input"
+            type="range"
+            value="{{steps::input}}"
+            min="3" max="20"
+            on-change="render"> {{steps}}</p>
+      <p><label for="input">Rotation: </label><br>
+            <input id="input"
+            type="range"
+            value="{{rotation::input}}"
+            min="0" max="360"
+            on-change="render"> {{rotation}}</p>
+      <p><label for="input">Size: </label><br>
+            <input id="input"
+            type="range"
+            value="{{size::input}}"
+            min="100" max="500"
+            on-change="render"> {{size}}</p>
+      </div>
+      <svg id="star"></svg>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: 'line-star-edit',
+        properties: {
+            points: {
+                type: Number,
+                value: 5
+            },
+            steps: {
+                type: Number,
+                value: 10
+            },
+            rotation: {
+                type: Number,
+                value: 0
+            },
+            size: {
+                type: Number,
+                value: 100
+            },
+            color: {
+                type: String,
+                value: 'black'
+            },
+            stroke: {
+                type: Number,
+                value: 1
+            }
+        },
+        ready: function() {
+            this.render();
+        },
+        render: function() {
+
+            data = RADIAL(this.points,
+                this.size / 2,
+                this.size / 2,
+                this.size / 2,
+                this.rotation,
+                parseInt(this.steps));
+            svg = d3.select(this.$.star)
+                .attr("width", this.size)
+                .attr("height", this.size);
+            lines = svg.selectAll("line").remove();
+            lines = svg.selectAll("line");
+            lines = lines.data(data);
+            linesE = lines.enter().append("line")
+                .attr("x1", function(d) {
+                    return d.x1;
+                })
+                .attr("y1", function(d) {
+                    return d.y1;
+                })
+                .attr("x2", function(d) {
+                    return d.x2;
+                })
+                .attr("y2", function(d) {
+                    return d.y2;
+                })
+                .style("stroke", this.color)
+                .style("stroke-width", this.stroke);
+            lines.exit().remove();
+        }
+    });
+</script>
