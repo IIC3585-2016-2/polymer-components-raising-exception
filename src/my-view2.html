@@ -13,6 +13,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="line-star.html">
 <link rel="import" href="line-star-edit.html">
 <link rel="import" href="../bower_components/iron-doc-viewer/iron-doc-viewer.html">
+<link rel="import" href="../bower_components/marked-element/marked-element.html">
 
 <dom-module id="my-view2">
     <template>
@@ -22,10 +23,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         padding: 10px;
       }
+      p {
+        font-size: 20px;
+      }
+      .markdown-html{
+        font-size: 25px;
+        color: LightSeaGreen;
+
+      }
     </style>
 
     <div class="card">
-      <h1>Middle Component: <line-star points=6 size=20 steps=4></line-star>&lt;line-star&gt;</h1>
+      <h1>Middle Component: <line-star points=6 size=30 steps=4></line-star></h1>
+      <center>
+      <marked-element markdown="```html
+      <line-star></line-star>
+        ```"> <div class="markdown-html"></div>
+      </marked-element>
+      </center>
       <p> &lt;line-star&gt; is a simple svg html element of a
       radial star-like structure compose of only straight svg lines. Like:</p>
       <center>
@@ -36,7 +51,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <line-star ></line-star>
       </center>
       <p> Which is the default star.
-        You can change the number of points it has ( &lt;=3 ): &lt;line-star points=3&gt; </p>
+        You can change the number of points it has:</p>
+        <center>
+        <marked-element markdown="```html
+        <line-star points=3></line-star>
+          ```"> <div class="markdown-html"></div>
+        </marked-element>
+        </center>
       <center>
         <line-star points=3 ></line-star>
         <line-star points=4 ></line-star>
@@ -45,7 +66,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <line-star points=7 ></line-star>
       </center>
       <p>
-      You can change the number of steps to create it ( &lt;=3 ): &lt;line-star points=3 steps=15&gt; </p>
+      You can change the number of steps to create it: </p>
+      <center>
+      <marked-element markdown="```html
+      <line-star points=3 steps=15></line-star>
+        ```"> <div class="markdown-html"></div>
+      </marked-element>
+      </center>
       <center>
         <line-star points=3 steps=5></line-star>
         <line-star points=3 steps=10></line-star>
@@ -54,7 +81,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <line-star points=3 steps=25></line-star>
       </center>
       <p>
-      You can change it's size ( square svg ): &lt;line-star points=4 size=200&gt; </p>
+      You can change it's size ( square svg ):</p>
+      <center>
+      <marked-element markdown="```html
+      <line-star points=4 size=200></line-star>
+        ```"> <div class="markdown-html"></div>
+      </marked-element>
+      </center>
       <center>
         <line-star points=4 size=100 ></line-star>
         <line-star points=4 size=150 ></line-star>
@@ -63,7 +96,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <line-star points=4 size=100 ></line-star>
       </center>
       <p>
-      You can rotate it: &lt;line-star points=4 rotation=30&gt; </p>
+      You can rotate it: </p>
+      <center>
+      <marked-element markdown="```html
+      <line-star points=4 rotation=30></line-star>
+        ```"> <div class="markdown-html"></div>
+      </marked-element>
+      </center>
       <center>
         <line-star points=4 rotation=0 ></line-star>
         <line-star points=4 rotation=30 ></line-star>
@@ -72,7 +111,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <line-star points=4 rotation=45 ></line-star>
       </center>
       <p>
-      You change it's color through simple string colors: &lt;line-star points=4 color='red'&gt; </p>
+      You change it's color through simple string colors: </p>
+      <center>
+      <marked-element markdown="```html
+      <line-star points=4 color='red'></line-star>
+        ```"> <div class="markdown-html"></div>
+      </marked-element>
+      </center>
       <center>
         <line-star points=4 color='orange' ></line-star>
         <line-star points=4 color='red' ></line-star>
@@ -81,7 +126,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <line-star points=4 color='#9932CC' ></line-star>
       </center>
       <p>
-      You change the width of the stroke of the lines: &lt;line-star points=4 color='red' stroke=10 &gt;</p>
+      You change the width of the stroke of the lines:</p>
+      <center>
+      <marked-element markdown="```html
+      <line-star points=4 color='red' stroke=10></line-star>
+        ```"> <div class="markdown-html"></div>
+      </marked-element>
+      </center>
       <center>
         <line-star points=4 color='red' stroke=1 ></line-star>
         <line-star points=4 color='red' stroke=2 ></line-star>
@@ -90,7 +141,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <line-star points=4 color='red' stroke=5 ></line-star>
       </center>
       <p>
-      And make it your own: &lt;points=6 steps=12 rotation=10 size=300 color='green' stroke=2&gt; </p>
+      And make it your own:</p>
+      <center>
+      <marked-element markdown="```html
+      <line-star points=6 steps=12 rotation=10
+       size=300 color='green' stroke=2></line-star>
+        ```"> <div class="markdown-html"></div>
+      </marked-element>
+      </center>
       <center>
         <line-star points=6 steps=12 rotation=10 size=350 color='green' stroke=2 ></line-star>
       </center>
