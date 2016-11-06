@@ -11,6 +11,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="circle-transition.html">
+<link rel="import" href="../bower_components/iron-doc-viewer/iron-doc-viewer.html">
+
 <dom-module id="my-view1">
     <template>
     <style include="shared-styles">
@@ -23,7 +25,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div class="card">
       <h1>Simple Component: <circle-transition size=20 color='black'></circle-transition> &lt;circle-transition&gt;</h1>
-      <p> An interesting application of components is to reuse costume
+    <p> An interesting application of components is to reuse costume
         complex html elements. Here we use d3 to create a html element that
          transitions forever independently from the rest of the elements.
        <circle-transition size=20 color='red'></circle-transition></p>
@@ -52,13 +54,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        &lt;circle-transition delay=1000 size=100 &gt; </p>
     <center>
       <circle-transition size=50 color='yellow' delay=0></circle-transition>
-      <circle-transition size=100 color='orange' delay=100></circle-transition>
-      <circle-transition size=150 color='red' delay=200></circle-transition>
-      <circle-transition size=200 color='Crimson' delay=300></circle-transition>
-      <circle-transition size=150 color='#8B008B' delay=400></circle-transition>
-      <circle-transition size=100 color='#9932CC' delay=500></circle-transition>
-      <circle-transition size=50 color='#FF00FF' delay=600></circle-transition>
+      <circle-transition size=100 color='orange' delay=200></circle-transition>
+      <circle-transition size=150 color='red' delay=400></circle-transition>
+      <circle-transition size=200 color='Crimson' delay=600></circle-transition>
+      <circle-transition size=150 color='#8B008B' delay=800></circle-transition>
+      <circle-transition size=100 color='#9932CC' delay=1000></circle-transition>
+      <circle-transition size=50 color='#FF00FF' delay=1200></circle-transition>
     </center>
+
+    <iron-doc-viewer>
+  {
+    "is": "circle-transition",
+    "properties": [
+      {"name": "size",
+      "type": "Number",
+       "desc": "Size of the svg square element."},
+      {"name": "color",
+       "type": "String",
+       "desc": "String representation of the color of the animated circle. Supports names of html colors and hex codes."},
+      {"name": "delay",
+      "type": "Number",
+      "desc": "Time in milliseconds of delay for the animation to start."}
+    ]
+  }
+  </iron-doc-viewer>
+  
     </div>
 
   </template>

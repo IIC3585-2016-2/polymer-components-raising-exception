@@ -12,9 +12,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="line-star.html">
 <link rel="import" href="line-star-edit.html">
+<link rel="import" href="../bower_components/iron-doc-viewer/iron-doc-viewer.html">
 
 <dom-module id="my-view2">
-  <template>
+    <template>
     <style include="shared-styles">
       :host {
         display: block;
@@ -98,12 +99,38 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <center>
         <line-star-edit> </line-star-edit>
       </center>
+
+      <iron-doc-viewer>
+    {
+      "is": "line-star",
+      "properties": [
+      {"name": "points",
+      "type": "Number",
+       "desc": "Number of points the star has. Must be greater than 2."},
+       {"name": "steps",
+       "type": "Number",
+        "desc": "Number of line-steps used to draw the star. Must be greater than 2."},
+        {"name": "rotation",
+        "type": "Number",
+         "desc": "Degrees to rotate clockwise the whole figure from its center."},
+         {"name": "size",
+         "type": "Number",
+          "desc": "Size of the svg square element containing the star."},
+        {"name": "color",
+         "type": "String",
+         "desc": "String representation of the color of the star. Supports names of html colors and hex codes."},
+        {"name": "stroke",
+        "type": "Number",
+        "desc": "Stroke width of the star's lines."}
+      ]
+    }
+    </iron-doc-viewer>
     </div>
   </template>
 
-  <script>
-    Polymer({
-      is: 'my-view2'
-    });
-  </script>
+    <script>
+        Polymer({
+            is: 'my-view2'
+        });
+    </script>
 </dom-module>
