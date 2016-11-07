@@ -3,10 +3,12 @@
 <link rel="import" href="../bower_components/google-signin/google-signin.html">
 <link rel="import" href="../bower_components/google-sheets/google-sheets.html">
 <link rel="import" href="../bower_components/iron-data-table/iron-data-table.html">
+<link rel="import" href="../bower_components/iron-doc-viewer/iron-doc-viewer.html">
+
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
 
-<dom-module id="polymer-test2">
+<dom-module id="rip-sheets">
     <style>
       .legend {
         font-size: 12px;
@@ -15,7 +17,6 @@
         stroke-width: 2;
       }
       .content{
-        align:inline-block;
       }
       .left{
         float:left;
@@ -30,19 +31,26 @@
         width:100%;
         height:200px;
       }
+      .content:after{
+        content: '';
+        display: block;
+        clear: both;
+      }
     </style>:
     <template>
+      <div>
       <google-signin
         client-id="634390672795-gltuim1i7va3jqpesiuuk83h84d6e33d.apps.googleusercontent.com"
         scopes="https://spreadsheets.google.com/feeds">
       </google-signin>
       <google-sheets id="sheet"
                   client-id="634390672795-gltuim1i7va3jqpesiuuk83h84d6e33d.apps.googleusercontent.com"
-                  key="18EaQ2BsPT55cu41zKvVo-oMjnc4jtqMJ9UsoS51-RuU" tab-id="1"
+                  key="{{spreadsheet}}" tab-id="1"
                   published rows="{{rows}}" tab="{{tab}}"
                   open-in-google-docs-url="{{openInGoogleDocsUrl}}"></google-sheets>
         <h2>CHART</h2>
         <div class="content">
+          <!--
             <iron-data-table class="block" id="table2" items="[[table.selectedItems]]">
                 <data-table-column name="Github" filter-by="gsx$github.$t">
                   <template>[[item.gsx$github.$t]]</template>
@@ -78,6 +86,7 @@
                   <template>[[item.gsx$nf.$t]]</template>
                 </data-table-column>
             </iron-data-table>
+          -->
             <iron-data-table class="left" id="table" items="[[rows]]" selection-enabled multi-selection>
               <data-table-column name="No. Alumno">
                 <template>[[item.gsx$no.alumno.$t]]</template>
@@ -101,12 +110,12 @@
 
         </div>
 
-
+</div>
   </template>
 </dom-module>
 <script>
 Polymer({
-    is: 'polymer-test2',
+    is: 'rip-sheets',
     properties:{
       rows:{
         type:Array,
@@ -132,6 +141,10 @@ Polymer({
       legendSpacing:{
         type:Number,
         value: 4
+      },
+      spreadsheet:{
+        type:String,
+        value:""
       }
     },
     ready: function() {
@@ -140,7 +153,8 @@ Polymer({
     },
     listeners:{
       'selected-items-changed':'_selectedItems'
-    }
+    },
+    in_array: (arr) => (x) => !arr.includes(x)
     ,
     __aprova3: function(data){
       let napprove = data.filter((item) => {
@@ -162,10 +176,14 @@ Polymer({
     _selectedItems: function(e){
       var table = this.$.table
       var data = table.selectedItems
-      console.log(e,data)
       if (data && (data.length >= 0 || data.inverted)){
-        if (data.inverted){
+        if (data.inverted && data.length == 0){
           this.render(this.__aprova3(table.items))
+        }
+        else if(data.inverted && data.length > 0){
+          var in_data = this.in_array(data)
+          var items = table.items.filter(in_data)
+          this.render(this.__aprova3(items))
         }
         else{
           this.render(this.__aprova3(data))

@@ -8,6 +8,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="shared-styles.html">
 <link rel="import" href="component2.html">
 
 <dom-module id="my-view3">
@@ -15,31 +16,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="shared-styles">
       :host {
         display: block;
-
         padding: 10px;
+      },
+      heightL{
+        height:1000px;
+      }
+      .block{
+        align:block;
       }
     </style>
     <div class="card">
       <h1>Complex Component: Google RIP Sheets </h1>
-      <polymer-test2></polymer-test2>
 
-      <iron-doc-viewer>
+      <rip-sheets spreadsheet="18EaQ2BsPT55cu41zKvVo-oMjnc4jtqMJ9UsoS51-RuU"></rip-sheets>
+
+      <iron-doc-viewer class="block">
     {
-      "is": "circle-transition",
+      "is": "rip-sheets",
       "properties": [
-        {"name": "size",
-        "type": "Number",
-         "desc": "Size of the svg square element."},
-        {"name": "color",
-         "type": "String",
-         "desc": "String representation of the color of the animated circle. Supports names of html colors and hex codes."},
-        {"name": "delay",
-        "type": "Number",
-        "desc": "Time in milliseconds of delay for the animation to start."}
+        {"name": "spreadsheet",
+        "type": "String",
+         "desc": "spreadsheet key to display."}
       ]
     }
     </iron-doc-viewer>
-    
+
     </div>
   </template>
 
